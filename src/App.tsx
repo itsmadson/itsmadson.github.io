@@ -193,18 +193,18 @@ function App() {
   ];
 
   const technologies = [
-    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/react.ico' alt="React" className="pixelated" />, name: 'React' },
-    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/expo.ico' alt="React Native" className="pixelated" />, name: 'React Native' },
-    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/electron.ico' alt="Electron" className="pixelated" />, name: 'Electron' },
-    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/flutter.ico' alt="Flutter" className="pixelated" />, name: 'Flutter' },
-    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/nextjs.ico' alt="Next.js" className="pixelated" />, name: 'Next.js' },
-    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/postgre.ico' alt="PostgreSQL" className="pixelated" />, name: 'PostgreSQL' },
-    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/supabase.ico' alt="Supabase" className="pixelated" />, name: 'Supabase' },
-    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/fastapi.ico' alt="FastApi" className="pixelated" />, name: 'FastApi' },
-    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/wordpress.ico' alt="WordPress" className="pixelated" />, name: 'WordPress' },
-    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/photoshop.ico' alt="Photoshop" className="pixelated" />, name: 'Photoshop' },
-    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/aftereffect.ico' alt="After Effects" className="pixelated" />, name: 'After Effects' },
-    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/figma.ico' alt="Figma" className="pixelated" />, name: 'Figma' },
+    { icon: <img loading="lazy" src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/react.ico' alt="React" className="pixelated" />, name: 'React' },
+    { icon: <img loading="lazy" src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/expo.ico' alt="React Native" className="pixelated" />, name: 'React Native' },
+    { icon: <img loading="lazy" src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/electron.ico' alt="Electron" className="pixelated" />, name: 'Electron' },
+    { icon: <img loading="lazy" src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/flutter.ico' alt="Flutter" className="pixelated" />, name: 'Flutter' },
+    { icon: <img loading="lazy" src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/nextjs.ico' alt="Next.js" className="pixelated" />, name: 'Next.js' },
+    { icon: <img loading="lazy" src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/postgre.ico' alt="PostgreSQL" className="pixelated" />, name: 'PostgreSQL' },
+    { icon: <img loading="lazy" src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/supabase.ico' alt="Supabase" className="pixelated" />, name: 'Supabase' },
+    { icon: <img loading="lazy" src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/fastapi.ico' alt="FastApi" className="pixelated" />, name: 'FastApi' },
+    { icon: <img loading="lazy" src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/wordpress.ico' alt="WordPress" className="pixelated" />, name: 'WordPress' },
+    { icon: <img loading="lazy" src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/photoshop.ico' alt="Photoshop" className="pixelated" />, name: 'Photoshop' },
+    { icon: <img loading="lazy" src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/aftereffect.ico' alt="After Effects" className="pixelated" />, name: 'After Effects' },
+    { icon: <img loading="lazy" src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/figma.ico' alt="Figma" className="pixelated" />, name: 'Figma' },
   ];
   
   const projects = [
@@ -326,7 +326,7 @@ function App() {
                       ))}
                     </div>
                     <div className="border border-green-700 p-1 inline-block relative overflow-hidden group">
-                      <img src={project.image} alt={project.title} className="w-full h-auto pixelated" />
+                      <img loading="lazy" src={project.image} alt={project.title} className="w-full h-auto pixelated" />
                       <div className="absolute inset-0 bg-green-800 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
                         <Zap className="w-0 h-0 group-hover:w-10 group-hover:h-10 transition-all duration-300 text-green-300 opacity-0 group-hover:opacity-100" />
                       </div>
@@ -467,7 +467,7 @@ function App() {
           <span>~$ All Rights Reserved [madson] - {new Date().getFullYear()}</span>
         </div>
         <div className='flex justify-center items-center mt-3'>
-            <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/madson.png' alt="logo" className="w-8 h-8 inline-block mr-1 " />
+            <img loading="lazy" src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/madson.png' alt="logo" className="w-8 h-8 inline-block mr-1 " />
         </div>    
       </main>
 
