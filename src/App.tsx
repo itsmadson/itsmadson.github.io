@@ -193,18 +193,18 @@ function App() {
   ];
 
   const technologies = [
-    { icon: <img src='../assets/react.ico' alt="React" className="pixelated" />, name: 'React' },
-    { icon: <img src='../assets/expo.ico' alt="React Native" className="pixelated" />, name: 'React Native' },
-    { icon: <img src='../assets/electron.ico' alt="Electron" className="pixelated" />, name: 'Electron' },
-    { icon: <img src='../assets/flutter.ico' alt="Flutter" className="pixelated" />, name: 'Flutter' },
-    { icon: <img src='../assets/nextjs.ico' alt="Next.js" className="pixelated" />, name: 'Next.js' },
-    { icon: <img src='../assets/postgre.ico' alt="PostgreSQL" className="pixelated" />, name: 'PostgreSQL' },
-    { icon: <img src='../assets/supabase.ico' alt="Supabase" className="pixelated" />, name: 'Supabase' },
-    { icon: <img src='../assets/fastapi.ico' alt="FastApi" className="pixelated" />, name: 'FastApi' },
-    { icon: <img src='../assets/wordpress.ico' alt="WordPress" className="pixelated" />, name: 'WordPress' },
-    { icon: <img src='../assets/photoshop.ico' alt="Photoshop" className="pixelated" />, name: 'Photoshop' },
-    { icon: <img src='../assets/aftereffect.ico' alt="After Effects" className="pixelated" />, name: 'After Effects' },
-    { icon: <img src='../assets/figma.ico' alt="Figma" className="pixelated" />, name: 'Figma' },
+    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/react.ico' alt="React" className="pixelated" />, name: 'React' },
+    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/expo.ico' alt="React Native" className="pixelated" />, name: 'React Native' },
+    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/electron.ico' alt="Electron" className="pixelated" />, name: 'Electron' },
+    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/flutter.ico' alt="Flutter" className="pixelated" />, name: 'Flutter' },
+    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/nextjs.ico' alt="Next.js" className="pixelated" />, name: 'Next.js' },
+    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/postgre.ico' alt="PostgreSQL" className="pixelated" />, name: 'PostgreSQL' },
+    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/supabase.ico' alt="Supabase" className="pixelated" />, name: 'Supabase' },
+    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/fastapi.ico' alt="FastApi" className="pixelated" />, name: 'FastApi' },
+    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/wordpress.ico' alt="WordPress" className="pixelated" />, name: 'WordPress' },
+    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/photoshop.ico' alt="Photoshop" className="pixelated" />, name: 'Photoshop' },
+    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/aftereffect.ico' alt="After Effects" className="pixelated" />, name: 'After Effects' },
+    { icon: <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/figma.ico' alt="Figma" className="pixelated" />, name: 'Figma' },
   ];
   
   const projects = [
@@ -406,7 +406,7 @@ function App() {
         {/* Profile Header */}
         <div className="border border-green-700 bg-black bg-opacity-80 rounded mb-8 p-4 flex flex-col sm:flex-row items-center sm:items-start gap-4 animate-fadeIn shadow-lg shadow-green-900/20">
           <img
-            src="../assets/avatar.jpg"
+            src="https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/avatar.jpg"
             alt="Profile"
             className="w-20 h-20 rounded border-2 border-green-700 pixelated"
           />
@@ -467,7 +467,7 @@ function App() {
           <span>~$ All Rights Reserved [madson] - {new Date().getFullYear()}</span>
         </div>
         <div className='flex justify-center items-center mt-3'>
-            <img src='../assets/madson.png' alt="logo" className="w-8 h-8 inline-block mr-1 " />
+            <img src='https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/madson.png' alt="logo" className="w-8 h-8 inline-block mr-1 " />
         </div>    
       </main>
 
