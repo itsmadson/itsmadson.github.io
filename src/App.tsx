@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Terminal,
   Github,
@@ -17,26 +17,171 @@ import {
   Box,
   Figma,
   Image as ImageIcon,
-  Play
+  Play,
+  Zap
 } from 'lucide-react';
 
-
 function App() {
-  const [text, setText] = useState('');
+  const [activePage, setActivePage] = useState('home');
+  const [typedText, setTypedText] = useState('');
+  const [typingComplete, setTypingComplete] = useState(false);
+  const [isGlitching, setIsGlitching] = useState(false);
   const fullText = 'Full Stack Developer & Designer';
+  const terminalRef = useRef<HTMLDivElement>(null);
+  const [showContent, setShowContent] = useState(false);
   
+  // Typing animation
   useEffect(() => {
     let currentIndex = 0;
     const intervalId = setInterval(() => {
       if (currentIndex <= fullText.length) {
-        setText(fullText.slice(0, currentIndex));
+        setTypedText(fullText.slice(0, currentIndex));
         currentIndex++;
       } else {
         clearInterval(intervalId);
+        setTypingComplete(true);
       }
     }, 100);
 
     return () => clearInterval(intervalId);
+  }, []);
+
+  // Random glitch effect
+  useEffect(() => {
+    if (typingComplete) {
+      const glitchInterval = setInterval(() => {
+        setIsGlitching(true);
+        setTimeout(() => setIsGlitching(false), 200);
+      }, 3000);
+      
+      return () => clearInterval(glitchInterval);
+    }
+  }, [typingComplete]);
+
+  // Terminal scroll effect
+  useEffect(() => {
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = 0;
+      setShowContent(false);
+      setTimeout(() => {
+        setShowContent(true);
+      }, 300);
+    }
+  }, [activePage]);
+
+  // Add the cursor effect script
+  useEffect(() => {
+    const cursor = document.getElementById('cursor-glow');
+    if (cursor) {
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
+      });
+    }
+  }, []);
+
+  // Add the custom animations
+  useEffect(() => {
+    const customStyles = `
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { 
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes glitch {
+      0% {
+        transform: translate(0);
+        text-shadow: 0.5px 0.5px 0 #00ff00, -0.5px -0.5px 0 #00ffff;
+      }
+      20% {
+        transform: translate(-1px, 1px);
+        text-shadow: 0.5px 0.5px 0 #00ff00, -0.5px -0.5px 0 #00ffff;
+      }
+      40% {
+        transform: translate(-1px, -1px);
+        text-shadow: 1px 1px 0 #00ff00, -1px -1px 0 #00ffff;
+      }
+      60% {
+        transform: translate(1px, 1px);
+        text-shadow: 1px 1px 0 #00ff00, -1px -1px 0 #00ffff;
+      }
+      80% {
+        transform: translate(1px, -1px);
+        text-shadow: 0.5px 0.5px 0 #00ff00, -0.5px -0.5px 0 #00ffff;
+      }
+      100% {
+        transform: translate(0);
+        text-shadow: 0.5px 0.5px 0 #00ff00, -0.5px -0.5px 0 #00ffff;
+      }
+    }
+
+    @keyframes scan {
+      0% {
+        background-position: 0 -100vh;
+      }
+      100% {
+        background-position: 0 100vh;
+      }
+    }
+
+    @keyframes terminalTyping {
+      from {
+        max-height: 0;
+        opacity: 0;
+      }
+      to {
+        max-height: 1000px;
+        opacity: 1;
+      }
+    }
+
+    .pixelated {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-glitch {
+      animation: glitch 0.3s linear forwards;
+    }
+
+    .animate-terminalTyping {
+      animation: terminalTyping 0.8s ease-out forwards;
+      overflow: hidden;
+    }
+    `;
+    
+    const style = document.createElement('style');
+    style.innerHTML = customStyles;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
   }, []);
 
   const skills = [
@@ -48,174 +193,294 @@ function App() {
   ];
 
   const technologies = [
-    { icon: <img src='../assets/react.ico' className="w-fit" />, name: 'React' },
-    { icon: <img src='../assets/expo.ico' className="w-fit" />, name: 'React Native' },
-    { icon: <img src='../assets/electron.ico' className="w-fit" />, name: 'Electron' },
-    { icon: <img src='../assets/flutter.ico' className="w-fit" />, name: 'Flutter' },
-    { icon: <img src='../assets/nextjs.ico' className="w-50 h-50" />, name: 'Next.js' },
-    { icon: <img src='../assets/postgre.ico' className="w-fit" />, name: 'PostgreSQL' },
-    { icon: <img src='../assets/supabase.ico' className="w-fit" />, name: 'Supabase' },
-    { icon: <img src='../assets/fastapi.ico' className="w-fit" />, name: 'FastApi' },
-    { icon: <img src='../assets/wordpress.ico' className="w-fit" />, name: 'WordPress' },
-    { icon: <img src='../assets/photoshop.ico' className="w-fit" />, name: 'Photoshop' },
-    { icon: <img src='../assets/aftereffect.ico' className="w-fit" />, name: 'After Effects' },
-    { icon: <img src='../assets/figma.ico' className="w-fit" />, name: 'Figma' },
+    { icon: <img src='../assets/react.ico' alt="React" className="pixelated" />, name: 'React' },
+    { icon: <img src='../assets/expo.ico' alt="React Native" className="pixelated" />, name: 'React Native' },
+    { icon: <img src='../assets/electron.ico' alt="Electron" className="pixelated" />, name: 'Electron' },
+    { icon: <img src='../assets/flutter.ico' alt="Flutter" className="pixelated" />, name: 'Flutter' },
+    { icon: <img src='../assets/nextjs.ico' alt="Next.js" className="pixelated" />, name: 'Next.js' },
+    { icon: <img src='../assets/postgre.ico' alt="PostgreSQL" className="pixelated" />, name: 'PostgreSQL' },
+    { icon: <img src='../assets/supabase.ico' alt="Supabase" className="pixelated" />, name: 'Supabase' },
+    { icon: <img src='../assets/fastapi.ico' alt="FastApi" className="pixelated" />, name: 'FastApi' },
+    { icon: <img src='../assets/wordpress.ico' alt="WordPress" className="pixelated" />, name: 'WordPress' },
+    { icon: <img src='../assets/photoshop.ico' alt="Photoshop" className="pixelated" />, name: 'Photoshop' },
+    { icon: <img src='../assets/aftereffect.ico' alt="After Effects" className="pixelated" />, name: 'After Effects' },
+    { icon: <img src='../assets/figma.ico' alt="Figma" className="pixelated" />, name: 'Figma' },
   ];
   
   const projects = [
     {
       title: 'Project 1',
       description: 'A beautiful mobile app for tracking daily habits and promoting mindfulness.',
-      image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1000&q=80',
+      image: '/api/placeholder/320/180',
       technologies: ['React Native', 'Supabase', 'TypeScript']
     },
     {
       title: 'Project 2',
       description: 'E-commerce platform with real-time inventory management.',
-      image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=1000&q=80',
+      image: '/api/placeholder/320/180',
       technologies: ['Next.js', 'PostgreSQL', 'Tailwind']
     },
     {
       title: 'Project 3',
       description: 'Cross-platform desktop application for video editing.',
-      image: 'https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=1000&q=80',
+      image: '/api/placeholder/320/180',
       technologies: ['Electron', 'React', 'FFmpeg']
     }
   ];
 
-  return (
-    <div className="min-h-screen bg-black text-white font-mono p-8">
-      {/* Header */}
-      <header className="max-w-4xl mx-auto mb-20">
-        <div className="flex justify-center items-center space-x-3">
-          <Terminal className="w-6 h-6 text-pink-500" />
-          <span className="text-sm text-pink-500 font-mono whitespace-pre">
-{`
-░█▄█░█▀█░█▀▄░█▀▀░█▀█░█▀█
-░█░█░█▀█░█░█░▀▀█░█░█░█░█
-░▀░▀░▀░▀░▀▀░░▀▀▀░▀▀▀░▀░▀
-`}
-</span>
+  const renderTerminalCommand = (section: string) => {
+    return (
+      <div className="flex items-start mb-1 animate-fadeIn">
+        <span className="text-green-400 mr-2">madson@portfolio:~$</span>
+        <span className="text-yellow-400">cat {section}.txt</span>
+      </div>
+    );
+  };
 
+  const renderContent = () => {
+    if (!showContent) return null;
+    
+    switch (activePage) {
+      case 'home':
+        return (
+          <>
+            {renderTerminalCommand('about')}
+            <div className="mb-8 text-green-200 animate-terminalTyping">
+              <p className="mb-4">
+                Hello! I'm a passionate developer and designer who loves creating beautiful and functional digital experiences.
+                I specialize in full-stack development, mobile apps, and creative design.
+              </p>
+            </div>
+            
+            {renderTerminalCommand('skills')}
+            <div className="mb-8">
+              <div className="grid grid-cols-1 gap-3">
+                {skills.map((skill, index) => (
+                  <div key={skill.name} 
+                    className="border border-green-800 bg-black bg-opacity-30 rounded p-3 transform hover:scale-[1.02] transition-all duration-300 hover:border-green-400"
+                    style={{ animationDelay: `${index * 150}ms` }}
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-green-400">{skill.icon}</span>
+                      <span className="text-yellow-300 font-bold">{skill.name}</span>
+                    </div>
+                    <p className="text-green-200 text-sm">{skill.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        );
+      
+      case 'tech':
+        return (
+          <>
+            {renderTerminalCommand('technologies')}
+            <div className="mb-8">
+              <span className='text-l'>Tech I Focused On Instead of Socializing:</span>
+              <div className="grid grid-cols-2 sm:grid-cols-3 mt-2 md:grid-cols-4 gap-3">
+                {technologies.map((tech, index) => (
+                  <div key={tech.name} 
+                    className="border border-green-800 bg-black bg-opacity-30 rounded p-2 flex items-center gap-2 hover:bg-green-900 transition-all duration-300 transform hover:scale-[1.05]"
+                    style={{ 
+                      animationDelay: `${index * 100}ms`,
+                      animation: 'fadeInUp 0.5s both'
+                    }}
+                  >
+                    <span className="text-green-400">{tech.icon}</span>
+                    <span className="text-green-200 text-sm">{tech.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        );
+      
+      case 'projects':
+        return (
+          <>
+            {renderTerminalCommand('projects')}
+            <div className="mb-8">
+              {projects.map((project, index) => (
+                <div key={project.title} 
+                  className="mb-6 border border-green-800 bg-black bg-opacity-30 rounded overflow-hidden hover:border-green-400 transition-all duration-500"
+                  style={{ 
+                    animationDelay: `${index * 200}ms`,
+                    animation: 'fadeInUp 0.6s both'
+                  }}
+                >
+                  <div className="p-4">
+                    <h3 className="text-yellow-300 font-bold mb-2">{project.title}</h3>
+                    <p className="text-green-200 mb-3 text-sm">{project.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {project.technologies.map((tech, i) => (
+                        <span key={tech} 
+                          className="text-xs px-2 py-1 bg-green-900 text-green-200 rounded-sm"
+                          style={{ 
+                            animationDelay: `${(index * 200) + (i * 100)}ms`,
+                            animation: 'fadeIn 0.5s both'
+                          }}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="border border-green-700 p-1 inline-block relative overflow-hidden group">
+                      <img src={project.image} alt={project.title} className="w-full h-auto pixelated" />
+                      <div className="absolute inset-0 bg-green-800 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                        <Zap className="w-0 h-0 group-hover:w-10 group-hover:h-10 transition-all duration-300 text-green-300 opacity-0 group-hover:opacity-100" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        );
+      
+      case 'contact':
+        return (
+          <>
+            {renderTerminalCommand('contact')}
+            <div className="mb-8">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                {[
+                  { icon: <Github className="w-4 h-4 text-green-400" />, name: 'GitHub' },
+                  { icon: <Twitter className="w-4 h-4 text-green-400" />, name: 'X' },
+                  { icon: <Instagram className="w-4 h-4 text-green-400" />, name: 'Instagram' },
+                  { icon: <Share2 className="w-4 h-4 text-green-400" />, name: 'Mastodon' },
+                  { icon: <Youtube className="w-4 h-4 text-green-400" />, name: 'YouTube' },
+                  { icon: <MessageCircle className="w-4 h-4 text-green-400" />, name: 'Discord' },
+                  { icon: <Music2 className="w-4 h-4 text-green-400" />, name: 'Spotify' },
+                ].map((item, index) => (
+                  <a href="#" key={item.name}
+                    className="border border-green-800 bg-black bg-opacity-30 rounded p-2 flex items-center gap-2 hover:bg-green-900 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg hover:shadow-green-900/50"
+                    style={{ 
+                      animationDelay: `${index * 100}ms`,
+                      animation: 'fadeIn 0.4s both'
+                    }}
+                  >
+                    {item.icon}
+                    <span className="text-green-200 text-sm">{item.name}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </>
+        );
+      
+      default:
+        return <p>Page not found. Type 'help' to see available commands.</p>;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-black text-green-300 font-mono p-4 md:p-8 relative overflow-hidden" 
+         style={{
+           backgroundImage: 'radial-gradient(#0f360f 1px, transparent 1px)',
+           backgroundSize: '20px 20px'
+         }}>
+      
+      {/* CRT Overlay Effect */}
+      <div className="pointer-events-none fixed inset-0 bg-gradient-to-b from-transparent to-green-900 opacity-10"></div>
+      <div className="pointer-events-none fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjMDAwIiBvcGFjaXR5PSIwLjE1IiAvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIgLz48L3N2Zz4=')]"></div>
+      
+      {/* Header with ASCII Art */}
+      <header className="max-w-3xl mx-auto mb-8 animate-float">
+        <div className="flex justify-center">
+          <pre className={`text-green-500 text-xs sm:text-sm whitespace-pre overflow-x-auto ${isGlitching ? 'animate-glitch' : ''}`}>
+{`
+███╗   ███╗ █████╗ ██████╗ ███████╗ ██████╗ ███╗   ██╗
+████╗ ████║██╔══██╗██╔══██╗██╔════╝██╔═══██╗████╗  ██║
+██╔████╔██║███████║██║  ██║███████╗██║   ██║██╔██╗ ██║
+██║╚██╔╝██║██╔══██║██║  ██║╚════██║██║   ██║██║╚██╗██║
+██║ ╚═╝ ██║██║  ██║██████╔╝███████║╚██████╔╝██║ ╚████║
+╚═╝     ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝
+`}
+          </pre>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-4xl mx-auto">
-        {/* Profile Section */}
-        <div className="mb-16 flex items-center gap-8">
+      {/* Main Content with Terminal Style */}
+      <main className="max-w-3xl mx-auto relative">
+        {/* Profile Header */}
+        <div className="border border-green-700 bg-black bg-opacity-80 rounded mb-8 p-4 flex flex-col sm:flex-row items-center sm:items-start gap-4 animate-fadeIn shadow-lg shadow-green-900/20">
           <img
             src="../assets/avatar.jpg"
             alt="Profile"
-            className="w-32 h-32 rounded-lg border-2 border-pink-500"
+            className="w-20 h-20 rounded border-2 border-green-700 pixelated"
           />
-          <div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">Sadegh Eghtesadi</h1>
-            <div className="text-xl md:text-2xl text-pink-500 h-8">{text}</div>
+          <div className="text-center sm:text-left">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-2 text-green-400">{isGlitching ? 'S4d3gh 3ght3s4d1' : 'Sadegh Eghtesadi'}</h1>
+            <div className="text-yellow-300 h-6">
+              {typedText}
+              <span className="animate-pulse">_</span>
+            </div>
+            <div className="text-green-600 text-xs mt-2">Last login: {new Date().toLocaleString()}</div>
           </div>
         </div>
 
-        {/* About Section */}
-        <div className="mb-16">
-          <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
-            Hello! I'm a passionate developer and designer who loves creating beautiful and functional digital experiences.
-            I specialize in full-stack development, mobile apps, and creative design.
-          </p>
+        {/* Navigation */}
+        <div className="mb-4 flex flex-wrap gap-2 animate-fadeIn" style={{ animationDelay: '400ms' }}>
+          {['home', 'tech', 'projects', 'contact'].map((page, index) => (
+            <button 
+              key={page}
+              onClick={() => setActivePage(page)}
+              className={`px-3 py-1 border ${activePage === page ? 'border-green-500 bg-green-900' : 'border-green-800'} rounded text-sm hover:bg-green-900 transition-all duration-300 transform hover:scale-105`}
+              style={{ animationDelay: `${500 + (index * 100)}ms` }}
+            >
+              {page.charAt(0).toUpperCase() + page.slice(1)}
+            </button>
+          ))}
         </div>
 
-        {/* Skills Section */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-6 text-pink-500">Skills</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {skills.map((skill) => (
-              <div key={skill.name} className="border border-gray-800 rounded-lg p-4 hover:border-pink-500 transition-colors duration-300">
-                <div className="flex items-center gap-3 mb-2">
-                  {skill.icon}
-                  <h3 className="text-lg font-semibold">{skill.name}</h3>
-                </div>
-                <p className="text-gray-400">{skill.description}</p>
-              </div>
-            ))}
+        {/* Terminal Window */}
+        <div className="border border-green-700 bg-black bg-opacity-80 rounded overflow-hidden animate-fadeIn shadow-lg shadow-green-900/30" 
+             style={{ animationDelay: '600ms' }}>
+          {/* Terminal Header */}
+          <div className="bg-green-900 px-4 py-1 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Terminal className="w-4 h-4 text-green-200" />
+              <span className="text-xs text-green-200">madson@portfolio: ~/{activePage}</span>
+            </div>
+            <div className="flex gap-1">
+              <div className="w-3 h-3 rounded-full bg-yellow-500 animate-pulse"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" style={{ animationDelay: '500ms' }}></div>
+              <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse" style={{ animationDelay: '1000ms' }}></div>
+            </div>
+          </div>
+          
+          {/* Terminal Content */}
+          <div 
+            ref={terminalRef}
+            className="p-4 max-h-[70vh] overflow-y-auto font-mono text-sm" 
+            style={{ 
+              backgroundImage: 'linear-gradient(rgba(0, 15, 0, 0.9), rgba(0, 20, 0, 0.95))'
+            }}
+          >
+            {renderContent()}
           </div>
         </div>
 
-        {/* Technologies Section */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-6 text-pink-500">Technologies</h2>
-          <div className="flex items-center justify-center flex-wrap gap-4">
-            {technologies.map((tech) => (
-              <div 
-                key={tech.name} 
-                className="flex flex-col items-center justify-center gap-2 px-4 py-2 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-300"
-              >
-                {tech.icon}
-                <span className="text-sm">{tech.name}</span>
-              </div>
-            ))}
-          </div>
+        {/* Footer */}
+        <div className="mt-8 text-center text-green-700 text-xs animate-fadeIn" style={{ animationDelay: '800ms' }}>
+          <span>~$ All Rights Reserved [madson] - {new Date().getFullYear()}</span>
         </div>
-
-
-        {/* Projects Section */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-6 text-pink-500">Projects</h2>
-          <div className="grid grid-cols-1 gap-8">
-            {projects.map((project) => (
-              <div key={project.title} 
-                className="border border-gray-800 rounded-lg overflow-hidden hover:border-pink-500 transition-colors duration-300">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                  <p className="text-gray-400 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <span key={tech} className="text-sm px-2 py-1 bg-gray-900 rounded-full">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Social Links */}
-        <div className="flex flex-wrap gap-6 text-gray-400">
-          <a href="#" className="hover:text-pink-500 transition-colors duration-300 flex items-center gap-2">
-            <Github className="w-5 h-5" />
-            <span>GitHub</span>
-          </a>
-          <a href="#" className="hover:text-pink-500 transition-colors duration-300 flex items-center gap-2">
-            <Twitter className="w-5 h-5" />
-            <span>X</span>
-          </a>
-          <a href="#" className="hover:text-pink-500 transition-colors duration-300 flex items-center gap-2">
-            <Instagram className="w-5 h-5" />
-            <span>Instagram</span>
-          </a>
-          <a href="#" className="hover:text-pink-500 transition-colors duration-300 flex items-center gap-2">
-            <Share2 className="w-5 h-5" />
-            <span>Mastodon</span>
-          </a>
-          <a href="#" className="hover:text-pink-500 transition-colors duration-300 flex items-center gap-2">
-            <Youtube className="w-5 h-5" />
-            <span>YouTube</span>
-          </a>
-          <a href="#" className="hover:text-pink-500 transition-colors duration-300 flex items-center gap-2">
-            <MessageCircle className="w-5 h-5" />
-            <span>Discord</span>
-          </a>
-          <a href="#" className="hover:text-pink-500 transition-colors duration-300 flex items-center gap-2">
-            <Music2 className="w-5 h-5" />
-            <span>Spotify</span>
-          </a>
-        </div>
+        <div className='flex justify-center items-center mt-3'>
+            <img src='../assets/madson.png' alt="logo" className="w-8 h-8 inline-block mr-1 " />
+        </div>    
       </main>
+
+      {/* Add glowing cursor that follows mouse */}
+      <div id="cursor-glow" className="hidden md:block fixed w-40 h-40 rounded-full pointer-events-none mix-blend-screen" 
+           style={{
+             background: 'radial-gradient(circle, rgba(0,255,0,0.1) 0%, rgba(0,255,0,0) 70%)',
+             transform: 'translate(-50%, -50%)',
+             left: '50%',
+             top: '50%',
+             zIndex: 10
+           }}
+      ></div>
     </div>
   );
 }
