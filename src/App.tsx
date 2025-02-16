@@ -388,7 +388,7 @@ function App() {
       {/* Header with ASCII Art */}
       <header className="max-w-3xl mx-auto mb-8 animate-float">
         <div className="flex justify-center">
-        <pre className={`text-green-500 text-xs sm:text-sm whitespace-pre-wrap overflow-hidden text-center leading-tight ${isGlitching ? 'animate-glitch' : ''}`}>
+        <pre className={`text-green-500 text-[8px] xs:text-[10px] sm:text-xs md:text-sm whitespace-pre leading-tight text-center max-w-full overflow-hidden ${isGlitching ? 'animate-glitch' : ''}`}>
 {`
 ███╗   ███╗ █████╗ ██████╗ ███████╗ ██████╗ ███╗   ██╗
 ████╗ ████║██╔══██╗██╔══██╗██╔════╝██╔═══██╗████╗  ██║
@@ -398,6 +398,7 @@ function App() {
 ╚═╝     ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝
 `}
 </pre>
+
 
         </div>
       </header>
