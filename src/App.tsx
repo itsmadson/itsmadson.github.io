@@ -30,7 +30,7 @@ function App() {
   const terminalRef = useRef<HTMLDivElement>(null);
   const [showContent, setShowContent] = useState(false);
   
-  // Typing animation
+ 
   useEffect(() => {
     let currentIndex = 0;
     const intervalId = setInterval(() => {
@@ -46,7 +46,7 @@ function App() {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Random glitch effect
+ 
   useEffect(() => {
     if (typingComplete) {
       const glitchInterval = setInterval(() => {
