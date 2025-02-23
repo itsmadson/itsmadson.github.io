@@ -209,16 +209,16 @@ function App() {
   
   const projects = [
     {
-      title: 'Project 1',
+      title: 'Loveless',
       description: 'A beautiful mobile app for tracking daily habits and promoting mindfulness.',
-      image: '/api/placeholder/320/180',
-      technologies: ['React Native', 'Supabase', 'TypeScript']
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/loveless.png',
+      technologies: ['React', 'Supabase', 'Tailwind','React Native']
     },
     {
-      title: 'Project 2',
+      title: 'Metaphorspace',
       description: 'E-commerce platform with real-time inventory management.',
-      image: '/api/placeholder/320/180',
-      technologies: ['Next.js', 'PostgreSQL', 'Tailwind']
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/loveless.png',
+      technologies: ['Flutter', 'Firebase', 'Speak.js','React Native']
     },
     {
       title: 'Project 3',
