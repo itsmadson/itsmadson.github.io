@@ -212,20 +212,44 @@ function App() {
       title: 'Loveless',
       description: 'A beautiful mobile app for tracking daily habits and promoting mindfulness.',
       image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/loveless.png',
-      technologies: ['React', 'Supabase', 'Tailwind','React Native']
+      technologies: ['React','Node.js', 'Supabase', 'Tailwind','React Native']
     },
     {
       title: 'Metaphorspace',
       description: 'E-commerce platform with real-time inventory management.',
-      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/loveless.png',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/metaphorspace.png',
       technologies: ['Flutter', 'Firebase', 'Speak.js','React Native']
     },
     {
-      title: 'Project 3',
+      title: 'Yalda',
       description: 'Cross-platform desktop application for video editing.',
-      image: '/api/placeholder/320/180',
-      technologies: ['Electron', 'React', 'FFmpeg']
-    }
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/yalda.png',
+      technologies: ['Electron', 'Node.js']
+    },
+    {
+      title: 'Exam Info',
+      description: 'Cross-platform desktop application for video editing.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/examinfo.png',
+      technologies: ['HTML','CSS','JS']
+    },
+    {
+      title: 'Auto Screenshot Uploader',
+      description: 'A Python tool that automatically captures screenshots every 5 minutes and uploads them to your Dropbox account. This tool runs in the background, starts automatically with your system, and handles internet connection interruptions by retrying the upload once the connection is restored.',
+      image: '',
+      technologies: ['Python','Shell Script']
+    },
+    {
+      title: 'Youtube Subtitle Downloader',
+      description: 'The YouTube Subtitle Downloader is a simple and intuitive desktop application built with Python and Qt',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/yt.png',
+      technologies: ['Python','Qt']
+    },
+    {
+      title: 'Blueson',
+      description: 'DOS-attacks on bluetooth devices',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/blueson.png',
+      technologies: ['Python','Shell Script']
+    },
   ];
 
   const renderTerminalCommand = (section: string) => {
