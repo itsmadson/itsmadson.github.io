@@ -250,6 +250,24 @@ function App() {
       image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/blueson.png',
       technologies: ['Python','Shell Script']
     },
+    {
+      title: 'MadHand',
+      description: 'HandSynth is an innovative hand gesture-controlled synthesizer application.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/madhand.png',
+      technologies: ['Python','PyQt5','OpenCV']
+    },
+    {
+      title: 'Store management',
+      description: 'store management system implemented in two different frameworks: a console application and an Electron application. ',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/storemanagment.png',
+      technologies: ['C++','Electron.js','Node.js']
+    },
+    {
+      title: 'Store management',
+      description: 'store management system implemented in two different frameworks: a console application and an Electron application. ',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/storemanagment.png',
+      technologies: ['C++','Electron.js','Node.js']
+    },
   ];
 
   const renderTerminalCommand = (section: string) => {
