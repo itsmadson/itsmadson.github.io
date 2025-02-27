@@ -18,7 +18,9 @@ import {
   Figma,
   Image as ImageIcon,
   Play,
-  Zap
+  Zap,
+  LucideMail,
+  Send
 } from 'lucide-react';
 
 function App() {
@@ -79,7 +81,7 @@ function App() {
       });
     }
   }, []);
-
+  
   // Add the custom animations
   useEffect(() => {
     const customStyles = `
@@ -265,7 +267,7 @@ function App() {
     {
       title: 'Store Management',
       description: 'A store management system implemented as both a console application and an Electron application.',
-      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/storemanagment-min.webp',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/storemanagement-min.webp',
       technologies: ['C++', 'Electron.js', 'Node.js']
     },
     {
@@ -305,7 +307,14 @@ function App() {
       technologies: ['HTML', 'CSS', 'JS']
     }
   ];
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const projectsPerPage = 6;
+
+// Add this function to get paginated projects
+  const getPaginatedProjects = () => {
+    const startIndex = (currentPage - 1) * projectsPerPage;
+    return projects.slice(startIndex, startIndex + projectsPerPage);
+  };
 
   const renderTerminalCommand = (section: string) => {
     return (
@@ -326,8 +335,8 @@ function App() {
             {renderTerminalCommand('about')}
             <div className="mb-8 text-green-200 animate-terminalTyping">
               <p className="mb-4">
-                Hello! I'm a passionate developer and designer who loves creating beautiful and functional digital experiences.
-                I specialize in full-stack development, mobile apps, and creative design.
+              i smash keys, things explode (=
+              sometimes it’s genius, sometimes it’s a beautiful disaster. either way,it’s worth watching.
               </p>
             </div>
             
@@ -375,78 +384,130 @@ function App() {
           </>
         );
       
-      case 'projects':
-        return (
-          <>
-            {renderTerminalCommand('projects')}
-            <div className="mb-8">
-              {projects.map((project, index) => (
-                <div key={project.title} 
-                  className="mb-6 border border-green-800 bg-black bg-opacity-30 rounded overflow-hidden hover:border-green-400 transition-all duration-500"
-                  style={{ 
-                    animationDelay: `${index * 200}ms`,
-                    animation: 'fadeInUp 0.6s both'
-                  }}
-                >
-                  <div className="p-4">
-                    <h3 className="text-yellow-300 font-bold mb-2">{project.title}</h3>
-                    <p className="text-green-200 mb-3 text-sm">{project.description}</p>
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {project.technologies.map((tech, i) => (
-                        <span key={tech} 
-                          className="text-xs px-2 py-1 bg-green-900 text-green-200 rounded-sm"
-                          style={{ 
-                            animationDelay: `${(index * 200) + (i * 100)}ms`,
-                            animation: 'fadeIn 0.5s both'
-                          }}
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="border border-green-700 p-1 inline-block relative overflow-hidden group">
-                      <img loading="lazy" src={project.image} alt={project.title} className="w-full h-auto pixelated" />
-                      <div className="absolute inset-0 bg-green-800 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                        <Zap className="w-0 h-0 group-hover:w-10 group-hover:h-10 transition-all duration-300 text-green-300 opacity-0 group-hover:opacity-100" />
-                      </div>
-                    </div>
+        case 'projects':
+          return (
+            <>
+              {renderTerminalCommand('projects')}
+              <div className="mb-4">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-green-300">Showing {currentPage * projectsPerPage - projectsPerPage + 1} - {Math.min(currentPage * projectsPerPage, projects.length)} of {projects.length} projects</span>
+                  <div className="flex gap-2">
+                    <button 
+                      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                      disabled={currentPage === 1}
+                      className={`px-3 py-1 border border-green-700 rounded text-sm transition-all ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-900'}`}
+                    >
+                      Prev
+                    </button>
+                    <button 
+                      onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(projects.length / projectsPerPage)))}
+                      disabled={currentPage === Math.ceil(projects.length / projectsPerPage)}
+                      className={`px-3 py-1 border border-green-700 rounded text-sm transition-all ${currentPage === Math.ceil(projects.length / projectsPerPage) ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-900'}`}
+                    >
+                      Next
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
-          </>
-        );
-      
-      case 'contact':
-        return (
-          <>
-            {renderTerminalCommand('contact')}
-            <div className="mb-8">
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                {[
-                  { icon: <Github className="w-4 h-4 text-green-400" />, name: 'GitHub' },
-                  { icon: <Twitter className="w-4 h-4 text-green-400" />, name: 'X' },
-                  { icon: <Instagram className="w-4 h-4 text-green-400" />, name: 'Instagram' },
-                  { icon: <Share2 className="w-4 h-4 text-green-400" />, name: 'Mastodon' },
-                  { icon: <Youtube className="w-4 h-4 text-green-400" />, name: 'YouTube' },
-                  { icon: <MessageCircle className="w-4 h-4 text-green-400" />, name: 'Discord' },
-                  { icon: <Music2 className="w-4 h-4 text-green-400" />, name: 'Spotify' },
-                ].map((item, index) => (
-                  <a href="#" key={item.name}
-                    className="border border-green-800 bg-black bg-opacity-30 rounded p-2 flex items-center gap-2 hover:bg-green-900 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg hover:shadow-green-900/50"
+              </div>
+              <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                {getPaginatedProjects().map((project, index) => (
+                  <div key={project.title} 
+                    className="border border-green-800 bg-black bg-opacity-30 rounded overflow-hidden hover:border-green-400 transition-all duration-500 h-full"
                     style={{ 
-                      animationDelay: `${index * 100}ms`,
-                      animation: 'fadeIn 0.4s both'
+                      animationDelay: `${index * 200}ms`,
+                      animation: 'fadeInUp 0.6s both'
                     }}
                   >
-                    {item.icon}
-                    <span className="text-green-200 text-sm">{item.name}</span>
-                  </a>
+                    <div className="p-4">
+                      <h3 className="text-yellow-300 font-bold mb-2">{project.title}</h3>
+                      <p className="text-green-200 mb-3 text-sm">{project.description}</p>
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {project.technologies.map((tech, i) => (
+                          <span key={tech} 
+                            className="text-xs px-2 py-1 bg-green-900 text-green-200 rounded-sm"
+                            style={{ 
+                              animationDelay: `${(index * 200) + (i * 100)}ms`,
+                              animation: 'fadeIn 0.5s both'
+                            }}
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      {project.image && (
+                        <div className="border border-green-700 p-1 inline-block relative overflow-hidden group">
+                          <img loading="lazy" src={project.image} alt={project.title} className="w-full h-auto pixelated" />
+                          <div className="absolute inset-0 bg-green-800 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                            <Zap className="w-0 h-0 group-hover:w-10 group-hover:h-10 transition-all duration-300 text-green-300 opacity-0 group-hover:opacity-100" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 ))}
               </div>
-            </div>
-          </>
-        );
+              <div className="flex justify-center gap-1 mb-4">
+                {Array.from({ length: Math.ceil(projects.length / projectsPerPage) }, (_, i) => (
+                  <button 
+                    key={i} 
+                    onClick={() => setCurrentPage(i + 1)}
+                    className={`w-8 h-8 flex items-center justify-center rounded-full text-xs transition-all ${currentPage === i + 1 ? 'bg-green-700 text-black' : 'border border-green-700 hover:bg-green-900'}`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
+            </>
+          );
+      
+          case 'contact':
+            return (
+              <>
+                {renderTerminalCommand('contact')}
+                <div className="mb-8">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                    {[
+                      { icon: <Github className="w-4 h-4 text-green-400" />, name: 'GitHub', url: 'https://github.com/itsmadson' },
+                      { icon: <Twitter className="w-4 h-4 text-green-400" />, name: 'X (Twitter)', url: 'https://twitter.com/its_madson_' },
+                      { icon: <Instagram className="w-4 h-4 text-green-400" />, name: 'Instagram', url: 'https://instagram.com/its.madson' },
+                      { icon: <Share2 className="w-4 h-4 text-green-400" />, name: 'Mastodon', url: 'https://mastodon.social/@itsmadson' },
+                      { icon: <Youtube className="w-4 h-4 text-green-400" />, name: 'YouTube', url: 'https://youtube.com/@itsmadson' },
+                      { icon: <MessageCircle className="w-4 h-4 text-green-400" />, name: 'Discord', url: 'https://discord.com/invite/btcFjvwVZe' },
+                      { icon: <Music2 className="w-4 h-4 text-green-400" />, name: 'Spotify', url: 'https://open.spotify.com/playlist/2y3fYmfaaYDQBWeBvjI6r2?si=341d78efafc647c7' },
+                      { icon: <Send className="w-4 h-4 text-green-400" />, name: 'Telegram', url: 'https://t.me/its_madson' },
+                    ].map((item, index) => (
+                      <a 
+                        href={item.url} 
+                        key={item.name}
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="border border-green-800 bg-black bg-opacity-30 rounded p-2 flex items-center gap-2 hover:bg-green-900 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg hover:shadow-green-900/50"
+                        style={{ 
+                          animationDelay: `${index * 100}ms`,
+                          animation: 'fadeIn 0.4s both'
+                        }}
+                      >
+                        {item.icon}
+                        <span className="text-green-200 text-sm">{item.name}</span>
+                      </a>
+                    ))}
+                  </div>
+                  <div className="mt-6 border border-green-800 bg-black bg-opacity-30 rounded p-4">
+                    <h3 className="text-yellow-300 font-bold mb-2">Get In Touch</h3>
+                    <p className="text-green-200 mb-3">Feel free to reach out for collaboration or job opportunities.</p>
+                    <a 
+                      href="mailto:sadegh.eghtesadi2005@gmail.com" 
+                      className="inline-block px-3 py-2 bg-green-800 hover:bg-green-700 text-green-100 rounded transition-all duration-300"
+                    >
+                      <span className="flex items-center gap-2">
+                        <MessageCircle className="w-4 h-4" />
+                        Email Me
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </>
+            );
       
       default:
         return <p>Page not found. Type 'help' to see available commands.</p>;
@@ -533,14 +594,21 @@ function App() {
           
           {/* Terminal Content */}
           <div 
-            ref={terminalRef}
-            className="p-4 max-h-[70vh] overflow-y-auto font-mono text-sm" 
-            style={{ 
-              backgroundImage: 'linear-gradient(rgba(0, 15, 0, 0.9), rgba(0, 20, 0, 0.95))'
-            }}
-          >
-            {renderContent()}
-          </div>
+              ref={terminalRef}
+              className="p-4 max-h-[70vh] overflow-y-auto font-mono text-sm relative" 
+              style={{ 
+                backgroundImage: 'linear-gradient(rgba(0, 15, 0, 0.9), rgba(0, 20, 0, 0.95))',
+                scrollbarWidth: 'thin',
+                scrollbarColor: '#2f855a #111'
+              }}
+            >
+              {activePage === 'projects' && (
+                <div className="absolute top-2 right-2 text-green-500 animate-pulse text-xs opacity-80 pointer-events-none">
+                  <span>Scroll or use navigation ▼</span>
+                </div>
+              )}
+              {renderContent()}
+            </div>
         </div>
 
         {/* Footer */}
@@ -565,5 +633,31 @@ function App() {
     </div>
   );
 }
+const customScrollbarStyles = `
+  /* For WebKit browsers */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #111;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #2f855a;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #38a169;
+  }
+`;
+
+// Add the custom scrollbar styles to your existing style creation
+const style = document.createElement('style');
+style.innerHTML =  customScrollbarStyles;
+document.head.appendChild(style);
 
 export default App;
