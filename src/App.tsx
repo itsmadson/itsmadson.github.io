@@ -209,66 +209,103 @@ function App() {
   
   const projects = [
     {
+      title: 'MadHand',
+      description: 'An innovative hand gesture-controlled synthesizer application that translates hand movements into musical notes using computer vision techniques.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/madhand-min.webp',
+      technologies: ['Python', 'PyQt5', 'OpenCV']
+    },
+    {
+      title: 'Afsoone',
+      description: 'A comprehensive children\'s platform with mobile and desktop applications, as well as a WordPress-based website.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/afsoone-min.webp',
+      technologies: ['React Native', 'Expo', 'Electron.js', 'WordPress']
+    },
+    {
       title: 'Loveless',
-      description: 'A beautiful mobile app for tracking daily habits and promoting mindfulness.',
-      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/loveless.png',
-      technologies: ['React','Node.js', 'Supabase', 'Tailwind','React Native']
+      description: 'An application where you and your partner have a dragon that reflects your relationship status.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/loveless-min.webp',
+      technologies: ['React', 'Node.js', 'Supabase', 'Tailwind', 'React Native']
     },
     {
       title: 'Metaphorspace',
-      description: 'E-commerce platform with real-time inventory management.',
-      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/metaphorspace.png',
-      technologies: ['Flutter', 'Firebase', 'Speak.js','React Native']
+      description: 'A platform for exploring short stories.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/metaphorspace-min.webp',
+      technologies: ['Flutter', 'Firebase', 'Speak.js', 'React Native']
     },
     {
       title: 'Yalda',
-      description: 'Cross-platform desktop application for video editing.',
-      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/yalda.png',
+      description: 'An ultimate anime, movie, and series finder that allows users to discover and stream content.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/yalda-min.webp',
       technologies: ['Electron', 'Node.js']
     },
     {
-      title: 'Exam Info',
-      description: 'Cross-platform desktop application for video editing.',
-      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/examinfo.png',
-      technologies: ['HTML','CSS','JS']
+      title: 'Pomoson',
+      description: 'A productivity app designed for individuals with ADHD, featuring Pomodoro timers, Lofi & White noise, To-Do lists, and a night light for eye comfort.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/pomoson-min.webp',
+      technologies: ['C#', '.NET Desktop']
     },
     {
       title: 'Auto Screenshot Uploader',
-      description: 'A Python tool that automatically captures screenshots every 5 minutes and uploads them to your Dropbox account. This tool runs in the background, starts automatically with your system, and handles internet connection interruptions by retrying the upload once the connection is restored.',
+      description: 'A Python tool that automatically captures screenshots every 5 minutes and uploads them to your Dropbox account, running seamlessly in the background.',
       image: '',
-      technologies: ['Python','Shell Script']
+      technologies: ['Python', 'Shell Script']
     },
     {
       title: 'Youtube Subtitle Downloader',
-      description: 'The YouTube Subtitle Downloader is a simple and intuitive desktop application built with Python and Qt',
-      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/yt.png',
-      technologies: ['Python','Qt']
+      description: 'A simple and intuitive desktop application built with Python and Qt to download YouTube subtitles.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/yt-min.webp',
+      technologies: ['Python', 'Qt']
     },
     {
       title: 'Blueson',
-      description: 'DOS-attacks on bluetooth devices',
-      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/blueson.png',
-      technologies: ['Python','Shell Script']
+      description: 'A tool designed for performing DOS attacks on Bluetooth devices.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/blueson-min.webp',
+      technologies: ['Python', 'Shell Script']
     },
     {
-      title: 'MadHand',
-      description: 'HandSynth is an innovative hand gesture-controlled synthesizer application.',
-      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/madhand.png',
-      technologies: ['Python','PyQt5','OpenCV']
+      title: 'Store Management',
+      description: 'A store management system implemented as both a console application and an Electron application.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/storemanagment-min.webp',
+      technologies: ['C++', 'Electron.js', 'Node.js']
     },
     {
-      title: 'Store management',
-      description: 'store management system implemented in two different frameworks: a console application and an Electron application. ',
-      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/storemanagment.png',
-      technologies: ['C++','Electron.js','Node.js']
+      title: 'FloralHaven Plant Store',
+      description: 'A front-end project for a plant and flower store.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/floral-min.webp',
+      technologies: ['Figma', 'HTML', 'CSS', 'JS']
     },
     {
-      title: 'Store management',
-      description: 'store management system implemented in two different frameworks: a console application and an Electron application. ',
-      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/refs/heads/main/assets/Projects/storemanagment.png',
-      technologies: ['C++','Electron.js','Node.js']
+      title: 'Clothing Store',
+      description: 'UI/UX design for a clothing store.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/clothes-min.webp',
+      technologies: ['Figma', 'HTML', 'CSS', 'JS']
     },
+    {
+      title: 'Persian Enigma Machine',
+      description: 'A simulation of the famous Enigma machine using the Persian (Farsi) alphabet.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/enigma-min.webp',
+      technologies: ['Python', 'Tkinter']
+    },
+    {
+      title: 'Afsoone CMS',
+      description: 'A content management system for mobile applications.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/adminafsoone-min.webp',
+      technologies: ['React', 'React Router']
+    },
+    {
+      title: 'Pingson',
+      description: 'A DNS changer application.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/pingson-min.webp',
+      technologies: ['C#', '.NET Desktop']
+    },
+    {
+      title: 'Exam Info',
+      description: 'An exam scheduler with integrated study tools.',
+      image: 'https://raw.githubusercontent.com/itsmadson/itsmadson.github.io/main/assets/Projects/examinfo-min.webp',
+      technologies: ['HTML', 'CSS', 'JS']
+    }
   ];
+  
 
   const renderTerminalCommand = (section: string) => {
     return (
